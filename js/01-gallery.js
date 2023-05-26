@@ -23,28 +23,19 @@ function initGallery(items) {
   listEl.append(...galleryElements);
 }
 initGallery(galleryItems);
+
 listEl.addEventListener("click", onGalleryItemClick);
 
 function onGalleryItemClick(event) {
-  let target = event.target;
-  console.log("target", event.target);
-  let clickedEtemEl = target.closest(".gallery__item");
-  if (!clickedItemEl) {
+  event.preventDefault();
+  const target = event.target;
+  if (!target.classList.contains("gallery__image")) {
     return;
   }
-  let { original, description } = clickedEtemEl.dataset;
-  console.log(clickedItemEl.dataset.original);
-  console.log(clickedItemEl.dataset.description);
-  console.log("clickedItemEl", clickedEtemEl);
-}
-
-function bindEvents(galleryElements) {
-  listEl.addEventListener("click", onGalleryItemClick);
-}
-const instance = basicLightbox.create(
-  `
-    <img src="" width="800" height="600">
+  const instance = basicLightbox.create(
+    `
+    <img src="${target.dataset.source}" width="800" height="600">
 `
-);
-instance.show();
-instance.close();
+  );
+  instance.show();
+}
