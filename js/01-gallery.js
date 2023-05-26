@@ -5,6 +5,7 @@ const listEl = document.querySelector(".gallery");
 function initGallery(items) {
   const galleryElements = items.map((item) => {
     const elementLi = document.createElement("li");
+    elementLi.classList.add("gallery__item");
 
     const elementA = document.createElement("a");
     elementLi.append(elementA);
@@ -22,12 +23,28 @@ function initGallery(items) {
   listEl.append(...galleryElements);
 }
 initGallery(galleryItems);
-console.log(galleryItems);
+listEl.addEventListener("click", onGalleryItemClick);
+
 function onGalleryItemClick(event) {
+  let target = event.target;
   console.log("target", event.target);
-  console.log("target", event.curentTarget);
+  let clickedEtemEl = target.closest(".gallery__item");
+  if (!clickedItemEl) {
+    return;
+  }
+  let { original, description } = clickedEtemEl.dataset;
+  console.log(clickedItemEl.dataset.original);
+  console.log(clickedItemEl.dataset.description);
+  console.log("clickedItemEl", clickedEtemEl);
 }
 
 function bindEvents(galleryElements) {
   listEl.addEventListener("click", onGalleryItemClick);
 }
+const instance = basicLightbox.create(
+  `
+    <img src="" width="800" height="600">
+`
+);
+instance.show();
+instance.close();
