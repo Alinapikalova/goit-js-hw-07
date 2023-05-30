@@ -29,7 +29,7 @@ listEl.addEventListener("click", onGalleryItemClick);
 function onGalleryItemClick(event) {
   event.preventDefault();
   const target = event.target;
-  if (!target.classList.contains("gallery__image")) {
+  if (!target.classList.nodeName === "IMG") {
     return;
   }
   const instance = basicLightbox.create(
